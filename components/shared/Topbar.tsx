@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { SignedIn, SignOutButton, OrganizationSwitcher } from '@clerk/nextjs';
+import { dark } from '@clerk/themes';
 const TopBar = () => {
   const isUserLoggenIn = true;
   return (
@@ -26,6 +27,7 @@ const TopBar = () => {
         </div>
         <OrganizationSwitcher
           appearance={{
+            baseTheme: dark,
             elements: {
               OrganizationSwitcherTrigger: 'py-2 px-4',
             },
