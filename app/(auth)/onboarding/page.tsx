@@ -2,14 +2,20 @@ import AccountProfle from '@/components/forms/AccountProfle';
 import { currentUser } from '@clerk/nextjs';
 export default async function Page() {
   const user = await currentUser();
-  const userInfo = {};
+  const userInfo = { // from database
+    _id: "123",
+    userName: "AhmedAlawneh",
+    bio: "hello",
+    image: "",
+    name: "Ahmed"
+  };
   const userData = {
-    id: user?.id,
-    objectId: user?._id,
-    userName: user?.userName || user?.userName,
-    name: user?.name || user?.firstName || "",
-    bio: user?.bio || "",
-    image: user?.image || user?.imageUrl,
+    id: user?.id || "",
+    objectId: userInfo?._id || "",
+    userName: userInfo?.userName || user?.username || "",
+    name: userInfo?.name || user?.firstName || "",
+    bio: userInfo?.bio || "",
+    image: userInfo?.image || user?.imageUrl || "",
   };
   return (
     <main className="mx-auto flex max-w-3xl flex-col justify-start px-10 py-20">

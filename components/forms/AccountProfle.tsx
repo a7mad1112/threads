@@ -5,17 +5,18 @@ import { UserValidation } from '@/lib/validations/user';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from '@/components/ui/form';
 import * as z from 'zod';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import Image from 'next/image';
 import { Textarea } from '../ui/textarea';
+import { useState } from 'react';
+import { isBase64Image } from '@/lib/utils';
+import { useUploadThing } from '@/lib/uploadthing'
 interface Props {
   user: {
     id: string;
@@ -28,6 +29,7 @@ interface Props {
   btnTitle: string;
 }
 const AccountProfle = ({ user, btnTitle }: Props) => {
+  const [files, setFiles] = useState<File[]>([]);
   const form = useForm({
     resolver: zodResolver(UserValidation),
     defaultValues: {
@@ -39,14 +41,29 @@ const AccountProfle = ({ user, btnTitle }: Props) => {
   });
 
   function onSubmit(values: z.infer<typeof UserValidation>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+    const blob = values.profilePhoto;
+    const hasImageChanged = isBase64Image(blob);
+
   }
 
-  const handleImage = (e: React.ChangeEvent, fieldChange: (value: string) => void) => {
+  const handleImage = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    fieldChange: (value: string) => void
+  ) => {
     e.preventDefault();
-  }
+    const fileReader = new FileReader();
+    if(e.target.files && e.target.files.length > 0)
+    {
+      const file = e.target.files[0];
+      setFiles(Array.from(e.target.files));
+      if(!file.type.includes('image')) return;
+      fileReader.onload = async (ev) => {
+        const imageDataUrl = ev.target?.result?.toString() || '';
+        fieldChange(imageDataUrl);
+      }
+      fileReader.readAsDataURL(file);
+    }
+  };
 
   return (
     <Form {...form}>
@@ -81,11 +98,14 @@ const AccountProfle = ({ user, btnTitle }: Props) => {
                 )}
               </FormLabel>
               <FormControl className="flex-1 text-base-semibold text-gray-200">
-                <Input type="file" accept="image/*" placeholder="Upload a photo" 
+                <Input
+                  type="file"
+                  accept="image/*"
+                  placeholder="Upload a photo"
                   className="account-form_image-input"
-                  onChange={(e) => handleImage(e, field.onChange)} />
+                  onChange={(e) => handleImage(e, field.onChange)}
+                />
               </FormControl>
-
             </FormItem>
           )}
         />
@@ -99,9 +119,12 @@ const AccountProfle = ({ user, btnTitle }: Props) => {
                 Name
               </FormLabel>
               <FormControl>
-                <Input type="text" className="account-form_input no-focus" {...field} />
+                <Input
+                  type="text"
+                  className="account-form_input no-focus"
+                  {...field}
+                />
               </FormControl>
-              
             </FormItem>
           )}
         />
@@ -115,7 +138,11 @@ const AccountProfle = ({ user, btnTitle }: Props) => {
                 UserName
               </FormLabel>
               <FormControl>
-                <Input type="text" className="account-form_input no-focus" {...field} />
+                <Input
+                  type="text"
+                  className="account-form_input no-focus"
+                  {...field}
+                />
               </FormControl>
             </FormItem>
           )}
@@ -130,13 +157,18 @@ const AccountProfle = ({ user, btnTitle }: Props) => {
                 Bio
               </FormLabel>
               <FormControl>
-                <Textarea rows={10} className="account-form_input no-focus" {...field} />
+                <Textarea
+                  rows={10}
+                  className="account-form_input no-focus"
+                  {...field}
+                />
               </FormControl>
-              
             </FormItem>
           )}
         />
-        <Button type="submit" className='bg-primary-500'>Submit</Button>
+        <Button type="submit" className="bg-primary-500">
+          Submit
+        </Button>
       </form>
     </Form>
   );
