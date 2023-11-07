@@ -1,16 +1,20 @@
-import { ClerkProvider } from '@clerk/nextjs';
-import '../globals.css';
+import React from 'react';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import TopBar from '@/components/shared/Topbar';
-import LeftSideBar from '@/components/shared/LeftSidebar';
-import RightSideBar from '@/components/shared/RightSidebar';
+import { ClerkProvider } from '@clerk/nextjs';
+import { dark } from '@clerk/themes';
+
+import '../globals.css';
+import LeftSidebar from '@/components/shared/LeftSidebar';
 import Bottombar from '@/components/shared/Bottombar';
+import RightSidebar from '@/components/shared/RightSidebar';
+import Topbar from '@/components/shared/Topbar';
 
 const inter = Inter({ subsets: ['latin'] });
+
 export const metadata: Metadata = {
   title: 'Threads',
-  description: 'A Next.js 13 Meta Threads Application',
+  description: 'A Next.js 13 Meta Threads application',
 };
 
 export default function RootLayout({
@@ -19,17 +23,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      appearance={{
+        baseTheme: dark,
+      }}
+    >
       <html lang="en">
-        <body className={`${inter.className} bg-dark-1`}>
-          <TopBar />
+        <body className={inter.className}>
+          <Topbar />
+
           <main className="flex flex-row">
-            <LeftSideBar />
+            <LeftSidebar />
             <section className="main-container">
               <div className="w-full max-w-4xl">{children}</div>
             </section>
-            <RightSideBar />
+            {/* @ts-ignore */}
+            <RightSidebar />
           </main>
+
           <Bottombar />
         </body>
       </html>

@@ -16,7 +16,9 @@ import Image from 'next/image';
 import { Textarea } from '../ui/textarea';
 import { useState } from 'react';
 import { isBase64Image } from '@/lib/utils';
-import { useUploadThing } from '@/lib/uploadthing'
+import { useUploadThing } from '@/lib/uploadthing';
+import { updateUser } from '@/lib/actions/user.actions';
+import { usePathname, useRouter } from 'next/navigation';
 interface Props {
   user: {
     id: string;
@@ -30,6 +32,9 @@ interface Props {
 }
 const AccountProfle = ({ user, btnTitle }: Props) => {
   const [files, setFiles] = useState<File[]>([]);
+  const { startUpload } = useUploadThing('media');
+  const router = useRouter();
+  const pathname = usePathname();
   const form = useForm({
     resolver: zodResolver(UserValidation),
     defaultValues: {
@@ -40,11 +45,32 @@ const AccountProfle = ({ user, btnTitle }: Props) => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof UserValidation>) {
+  const onSubmit = async function (values: z.infer<typeof UserValidation>) {
     const blob = values.profilePhoto;
     const hasImageChanged = isBase64Image(blob);
+    if (hasImageChanged) {
+      const imgRes = await startUpload(files);
+      if (imgRes && imgRes[0].fileUrl) {
+        values.profilePhoto = imgRes[0].fileUrl;
+      }
+    }
+    // TODO: Update user profile
+    await updateUser({
+      userId: user.id,
+      userName: values.userName,
+      name: values.name,
+      bio: values.bio,
+      image: values.profilePhoto,
+      path: pathname
+    });
 
-  }
+    if (pathname === "/profle/edit")
+    {
+      router.back();
+    } else {
+      router.push('/');
+    }
+  };
 
   const handleImage = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -52,15 +78,14 @@ const AccountProfle = ({ user, btnTitle }: Props) => {
   ) => {
     e.preventDefault();
     const fileReader = new FileReader();
-    if(e.target.files && e.target.files.length > 0)
-    {
+    if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
       setFiles(Array.from(e.target.files));
-      if(!file.type.includes('image')) return;
+      if (!file.type.includes('image')) return;
       fileReader.onload = async (ev) => {
         const imageDataUrl = ev.target?.result?.toString() || '';
         fieldChange(imageDataUrl);
-      }
+      };
       fileReader.readAsDataURL(file);
     }
   };

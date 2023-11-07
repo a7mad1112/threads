@@ -1,12 +1,11 @@
-import { UserButton } from "@clerk/nextjs";
+import { currentUser } from "@clerk/nextjs";
 
-export default function Home() {
+async function Home() {
   return (
     <>
-      <h1 className="head-text text-left"> 
-        Home
-      </h1>
-      {/* <UserButton afterSignOutUrl="/"/> */}
+      <h1 className='head-text text-left'>Home</h1>
     </>
-  )
-};
+  );
+}
+
+export default Home;
