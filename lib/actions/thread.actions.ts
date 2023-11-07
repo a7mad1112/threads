@@ -1,4 +1,8 @@
-import { connectToDB } from "../mongoose";
+"use server";
+import { revalidatePath } from 'next/cache';
+import ThreadModel from '../models/thread.model';
+import UserModel from '../models/user.model';
+import { connectToDB } from '../mongoose';
 
 interface Params {
   text: string;
@@ -12,10 +16,19 @@ export async function createThread({
   communityId,
   path,
 }: Params) {
-  try{
+  try {
     connectToDB();
-    // const createdThread = await Thread
-  } catch (err) {
-
+    const createdThread = await ThreadModel.create({
+      text,
+      author,
+      community: null,
+    });
+    // Update user model
+    await UserModel.findByIdAndUpdate(author, {
+      $push: { threads: createdThread._id },
+    });
+    revalidatePath(path);
+  } catch (err: any) {
+    throw new Error(`Error creating thread: ${err.message}`);
   }
 }
