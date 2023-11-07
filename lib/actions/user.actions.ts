@@ -49,7 +49,7 @@ export async function fetchUser(userId: string)
       //   path: 'communities',
       //   model:"Community"
       // });
-  } catch (err) {
-    throw new Error(`Failed to fetch user: ${error}`)
+  } catch (err: any) {
+    throw new Error(`Failed to fetch user: ${err.message}`)
   }
 }
