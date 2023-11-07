@@ -9,13 +9,13 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
+  FormMessage,
 } from '@/components/ui/form';
 import { Textarea } from '../ui/textarea';
 import { usePathname, useRouter } from 'next/navigation';
 import { ThreadValidation } from '@/lib/validations/thread';
 
-// import { updateUser } from '@/lib/actions/user.actions';
+// import { createThread } from '@/lib/actions/thread.actions';
 interface Props {
   user: {
     id: string;
@@ -34,21 +34,20 @@ function PostThread({ userId }: { userId: string }) {
     resolver: zodResolver(ThreadValidation),
     defaultValues: {
       thread: '',
-      accountId: userId
+      accountId: userId,
     },
   });
 
   const onSubmit = async () => {
-    
-  }
+    // await createThread();
+  };
   return (
     <Form {...form}>
-    <form
-      onSubmit={form.handleSubmit(onSubmit)}
-      className="flex flex-col justify-start gap-10 mt-10"
-    >
-
-<FormField
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="flex flex-col justify-start gap-10 mt-10"
+      >
+        <FormField
           control={form.control}
           name="thread"
           render={({ field }) => (
@@ -63,14 +62,14 @@ function PostThread({ userId }: { userId: string }) {
                   {...field}
                 />
               </FormControl>
-              <FormMessage/>
+              <FormMessage />
             </FormItem>
           )}
         />
-      <Button type="submit" className="bg-primary-500">
-        Post Thread
-      </Button>
-    </form>
+        <Button type="submit" className="bg-primary-500">
+          Post Thread
+        </Button>
+      </form>
     </Form>
   );
 }

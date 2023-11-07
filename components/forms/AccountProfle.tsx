@@ -8,7 +8,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
+  FormMessage,
 } from '@/components/ui/form';
 import * as z from 'zod';
 import { Input } from '../ui/input';
@@ -131,7 +131,7 @@ const AccountProfle = ({ user, btnTitle }: Props) => {
                   onChange={(e) => handleImage(e, field.onChange)}
                 />
               </FormControl>
-              <FormMessage/>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -151,7 +151,7 @@ const AccountProfle = ({ user, btnTitle }: Props) => {
                   {...field}
                 />
               </FormControl>
-              <FormMessage/>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -171,7 +171,7 @@ const AccountProfle = ({ user, btnTitle }: Props) => {
                   {...field}
                 />
               </FormControl>
-              <FormMessage/>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -191,7 +191,7 @@ const AccountProfle = ({ user, btnTitle }: Props) => {
                   {...field}
                 />
               </FormControl>
-              <FormMessage/>
+              <FormMessage />
             </FormItem>
           )}
         />
