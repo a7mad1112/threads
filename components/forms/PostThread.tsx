@@ -16,7 +16,6 @@ import { usePathname, useRouter } from 'next/navigation';
 import { ThreadValidation } from '@/lib/validations/thread';
 import { createThread } from '@/lib/actions/thread.actions';
 
-// import { createThread } from '@/lib/actions/thread.actions';
 interface Props {
   user: {
     id: string;
