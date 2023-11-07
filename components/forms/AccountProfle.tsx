@@ -23,7 +23,7 @@ interface Props {
   user: {
     id: string;
     objectId: string;
-    userName: string;
+    username: string;
     name: string;
     bio: string;
     image: string;
@@ -40,7 +40,7 @@ const AccountProfle = ({ user, btnTitle }: Props) => {
     defaultValues: {
       profilePhoto: user?.image || '',
       name: user?.name || '',
-      userName: user?.userName || '',
+      username: user?.username || '',
       bio: user?.bio || '',
     },
   });
@@ -54,18 +54,16 @@ const AccountProfle = ({ user, btnTitle }: Props) => {
         values.profilePhoto = imgRes[0].fileUrl;
       }
     }
-    // TODO: Update user profile
+    // TODO: Update user profilet
     await updateUser({
       userId: user.id,
-      userName: values.userName,
+      username: values.username,
       name: values.name,
       bio: values.bio,
       image: values.profilePhoto,
-      path: pathname
+      path: pathname,
     });
-
-    if (pathname === "/profle/edit")
-    {
+    if (pathname === '/profle/edit') {
       router.back();
     } else {
       router.push('/');
@@ -153,14 +151,14 @@ const AccountProfle = ({ user, btnTitle }: Props) => {
             </FormItem>
           )}
         />
-        {/* userName */}
+        {/* username */}
         <FormField
           control={form.control}
-          name="userName"
+          name="username"
           render={({ field }) => (
             <FormItem className="flex w-full gap-3 flex-col">
               <FormLabel className="text-base-semibold text-light-2">
-                UserName
+                username
               </FormLabel>
               <FormControl>
                 <Input

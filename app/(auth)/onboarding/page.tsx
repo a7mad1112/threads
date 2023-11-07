@@ -3,16 +3,16 @@ import { currentUser } from '@clerk/nextjs';
 export default async function Page() {
   const user = await currentUser();
   const userInfo = { // from database
-    _id: "123",
-    userName: "AhmedAlawneh",
-    bio: "hello",
-    image: "",
-    name: "Ahmed"
+    // _id: "123",
+    // username: "AhmedAlawneh",
+    // bio: "hello",
+    // image: "",
+    // name: "Ahmed"
   };
   const userData = {
     id: user?.id || "",
     objectId: userInfo?._id || "",
-    userName: userInfo?.userName || user?.username || "",
+    username: userInfo?.username || user?.username || "",
     name: userInfo?.name || user?.firstName || "",
     bio: userInfo?.bio || "",
     image: userInfo?.image || user?.imageUrl || "",
