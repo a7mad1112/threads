@@ -95,8 +95,8 @@ export async function fetchUsers({
     const query = {
       id: { $ne: userId }
     };
-    if(searchString.trim() !== '')
-    {
+    // if(searchString.trim() !== '')
+    // {
       // query.$or: FilterQuery<typeof UserModel> = [
       //   { username: { $regex: usersRegex } },
       //   { name: { $regex: usersRegex } },
@@ -114,7 +114,7 @@ export async function fetchUsers({
       const users = await usersQuery.exec();
       const isNext = totalUsersCount > skipAmmount + users.length;
       return { users, isNext };
-    }
+    // }
   } catch (err: any) {
     throw new Error(`Failed to fetch users: ${err.message}`);
   }

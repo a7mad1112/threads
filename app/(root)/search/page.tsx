@@ -10,11 +10,10 @@ const Page = async () => {
   // TODO: fetch users
   const result = await fetchUsers({
     userId: user.id,
-    searchString: "a",
+    searchString: "",
     pageNumber: 1,
     pageSize: 25
   });
-  console.log(result)
   return (
     <section>
       <h1 className="head-text mb-10">
@@ -27,7 +26,14 @@ const Page = async () => {
         ): (
           <>
             {result?.users?.map((person) => (
-              <UserCard />
+              <UserCard 
+                key={person.id}
+                id={person.id || ''}
+                name={person.name}
+                username={person.username}
+                imgUrl={person.image}
+                personType="User"
+              />
             ))}
           </>
         )}
