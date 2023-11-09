@@ -11,7 +11,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { Input } from '../ui/Input';
+import { Input } from '../ui/input';
 import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { CommentValidation } from '@/lib/validations/thread';
