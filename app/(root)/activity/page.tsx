@@ -10,7 +10,6 @@ const Page = async () => {
   if (!userInfo?.onboarded) redirect('/onboarding');
   // TODO: getActivity
   const activity = await getActivity(userInfo._id);
-  console.log(activity);
   return (
     <section>
       <h1 className="head-text mb-10">Activity</h1>
