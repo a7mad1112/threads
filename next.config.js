@@ -1,15 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  config: {
-    runtime: 'edge',
-  },
+  runtime: 'edge',
   typescript: {
     ignoreBuildErrors: true,
   },
   experimental: {
-    serverActions: {
-      bodySizeLimit: '2mb',
-    }
+    serverActions: true,
   },
   images: {
     remotePatterns: [
