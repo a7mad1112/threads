@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  config: {
+    runtime: 'edge',
+  },
   typescript: {
     ignoreBuildErrors: true,
   },
