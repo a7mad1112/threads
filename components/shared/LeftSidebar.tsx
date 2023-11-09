@@ -16,7 +16,7 @@ const LeftSideBar = () => {
     const fetchData = async () => {
       const user = await fetchUser(userId || '');
       setUserInfo(user);
-      const userActivity = await getActivity(user._id);
+      const userActivity = await getActivity(user?._id);
       setActivity(userActivity);
     };
     fetchData();
@@ -41,7 +41,7 @@ const LeftSideBar = () => {
                 width={24}
                 height={24}
               />
-              <p className="text-light-1 max-lg:hidden">{link.label}</p>
+              <p className="text-light-1">{link.label}</p>
               {(link.label === 'Activity' && activity?.length > 0) && (
                 <p className="ml-1 rounded-sm bg-light-4 px-2 py-1 !text-tiny-medium text-light-2">
                   {activity.length}

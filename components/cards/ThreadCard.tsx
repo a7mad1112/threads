@@ -121,7 +121,7 @@ const ThreadCard = ({
                   alt={`user_${index}`}
                   width={24}
                   height={24}
-                  className={`${
+                  className={`w-[24px] h-[24px] ${
                     index !== 0 && '-ml-5'
                   } rounded-full object-cover`}
                 />

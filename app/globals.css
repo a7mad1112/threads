@@ -41,6 +41,11 @@
     @apply h-auto min-w-[74px] rounded-lg bg-primary-500 text-[12px] text-light-1 !important;
   }
 
+  .small-user-card_btn {
+    @apply h-auto min-w-[40px] rounded-lg bg-primary-500 text-[10px] text-light-1 !important;
+  }
+
+
   .searchbar {
     @apply flex gap-1 rounded-lg bg-dark-3 px-4 py-2;
   }
