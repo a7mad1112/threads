@@ -47,10 +47,6 @@ export async function fetchUser(userId: string) {
   try {
     connectToDB();
     return await UserModel.findOne({ id: userId });
-    // .populate({
-    //   path: 'communities',
-    //   model:"Community"
-    // });
   } catch (err: any) {
     throw new Error(`Failed to fetch user: ${err.message}`);
   }
@@ -60,7 +56,6 @@ export async function fetchUserPosts(userId: string) {
   try {
     connectToDB();
     // find all threads authored by user with the given userId
-    // TODO: Populate community
     return await UserModel.findOne({ id: userId }).populate({
       path: 'threads',
       model: ThreadModel,

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { formatDateString } from './../../lib/utils';
 interface Props {
   id: string;
   currentUserId: string;
@@ -10,11 +11,6 @@ interface Props {
     image: string;
     id: string;
   };
-  community: {
-    id: string;
-    name: string;
-    image: string;
-  } | null;
   createdAt: string;
   comments: {
     author: {
@@ -30,7 +26,6 @@ const ThreadCard = ({
   parentId,
   content,
   author,
-  community,
   createdAt,
   comments,
   isComment,
@@ -104,6 +99,11 @@ const ThreadCard = ({
             </div>
           </div>
         </div>
+        {/* TODO: deleteThread */}
+        {/* TODO: show comment logos */}
+        <p className="text-subtle-meduim text-gray-1">
+          {formatDateString(createdAt)} 
+        </p>
       </div>
     </article>
   );
