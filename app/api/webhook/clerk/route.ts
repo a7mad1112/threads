@@ -17,7 +17,7 @@ import {
   removeUserFromCommunity,
   updateCommunityInfo,
 } from '@/lib/actions/community.actions';
-
+export const maxDuration = 5; // This function can run for a maximum of 5 seconds
 // Resource: https://clerk.com/docs/integration/webhooks#supported-events
 // Above document lists the supported events
 type EventType =
