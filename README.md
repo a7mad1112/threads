@@ -1,6 +1,9 @@
 # Fastest Growing App 🚀
 
-Welcome to the Fastest Growing App, a Next.js-based project showcasing skills in React, Next.js, Tailwind CSS, Git, and TypeScript.
+[Watch the video](https://drive.google.com/file/d/1-gGsQ0U5goqnOBnbamVRqiby3INUpob0/view?usp=sharing)
+
+
+Welcome to the Fastest Growing App, a Next. js-based project showcasing skills in React, Next.js, Tailwind CSS, Git, and TypeScript.
 
 ## Overview
 
