@@ -24,7 +24,7 @@ This app includes multiple thread levels, allowing users to create threads and c
 
 ## Live Demo
 
-Watch a live demo of the Fastest Growing App [here](insert_link_to_demo_video).
+Watch a live demo of the Fastest Growing App [here](https://drive.google.com/file/d/1-gGsQ0U5goqnOBnbamVRqiby3INUpob0/view).
 
 ## Installation
 
