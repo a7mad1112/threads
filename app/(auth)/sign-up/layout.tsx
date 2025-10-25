@@ -1,5 +1,3 @@
-import { ClerkProvider } from '@clerk/nextjs';
-import '../../globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
@@ -9,20 +7,14 @@ export const metadata: Metadata = {
   description: 'A Next.js 13 Meta Threads Application',
 };
 
-export default function RootLayout({
+export default function SignUpLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body className={`${inter.className} bg-dark-1`}>
-          <div className="w-full flex justify-center items-center min-h-screen">
-            {children}
-          </div>
-        </body>
-      </html>
-    </ClerkProvider>
+    <div className={`${inter.className} bg-dark-1`}>
+      <div className="w-full flex justify-center items-center min-h-screen">{children}</div>
+    </div>
   );
 }
