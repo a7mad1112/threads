@@ -21,7 +21,7 @@ export async function updateUser({
   image,
 }: Params): Promise<void> {
   try {
-    connectToDB();
+    await connectToDB();
 
     await UserModel.findOneAndUpdate(
       { id: userId },
@@ -45,7 +45,7 @@ export async function updateUser({
 
 export async function fetchUser(userId: string) {
   try {
-    connectToDB();
+    await connectToDB();
     return await UserModel.findOne({ id: userId });
   } catch (err: any) {
     throw new Error(`Failed to fetch user: ${err.message}`);
@@ -54,7 +54,7 @@ export async function fetchUser(userId: string) {
 
 export async function fetchUserPosts(userId: string) {
   try {
-    connectToDB();
+    await connectToDB();
     // find all threads authored by user with the given userId
     return await UserModel.findOne({ id: userId }).populate({
       path: 'threads',
@@ -84,10 +84,10 @@ export async function fetchUsers({
   sortBy?: SortOrder
 }) {
   try {
-    connectToDB();
+    await connectToDB();
     const skipAmmount = (pageNumber - 1) * pageSize;
     const usersRegex = new RegExp(searchString, 'i');
-    const query = {
+    const query: any = {
       id: { $ne: userId }
     };
     // if(searchString.trim() !== '')
@@ -117,7 +117,7 @@ export async function fetchUsers({
 
 export async function getActivity(userId: string) {
   try {
-    connectToDB();
+    await connectToDB();
     // todo: find all threads created by the user
     const userThreads = await ThreadModel.find({ author: userId });
     // todo: collect all the child thread id's (replies) from the 'children' field
